@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if current_user.is_authenticated %}    
+    <div class="row justify-content-center mt-5">
+        <div class="col-4">
+            <div class="">
+                <iframe
+                width="450"
+                height="250"
+                frameborder="0" style="border:0"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDJSUgd9hmIf0aQ5NPPM1N45TZSJIFMwuI&q=Rome+Italy"
+                allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+{% else %}
+<p>Please Sign In to access your Vacation Book</p>
+{% endif %}
+
+{% endblock content %}

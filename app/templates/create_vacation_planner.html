@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if current_user.is_authenticated %}    
+<form method="post">
+    {{ form.csrf_token }}
+    <div class="form-group">
+        {{ form.plan_name.label }}
+        {{ form.plan_name(class="form-control", placeholder="Name of your Vacation Plan") }}
+
+        {{ form.location.label}}
+        {{ form.location(class="form-control", placeholder="Location (ex. City, Country)") }}
+
+        {{ form.guests.label}}
+        {{ form.guests(class="form-control", placeholder="How Many Guests are Coming (ex. 2)") }}
+
+        {{ form.date_leaving.label}}
+        {{ form.date_leaving(class="form-control", placeholder="When are you leaving?") }}
+
+        {{ form.date_returning.label}}
+        {{ form.date_returning(class="form-control", placeholder="When are you returning?") }}
+
+        {{ form.budget.label}}
+        {{ form.budget(class="form-control", placeholder="What is your budget?") }}
+
+        {{ form.submit(class="btn btn-primary mt-2") }}
+    </div>
+</form>
+{% else %}
+<p>Please Sign In to access your Vacation Book</p>
+{% endif %}
+
+{% endblock content %}
