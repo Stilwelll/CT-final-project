@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-4">
+            <h3>Currently editing: {{ vacation.plan_name }}.</h3>
+            <form method="post" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                <div class="form-group">
+                    {{ form.plan_name.label }}
+                    {{ form.plan_name(class="form-control", value=vacation.plan_name) }}
+                    
+                    {{ form.location.label}}
+                    {{ form.location(class="form-control", value=vacation.location) }}
+                    
+                    {{ form.guests.label}}
+                    {{ form.guests(class="form-control", value=vacation.guests) }}
+                    
+                    {{ form.date_leaving.label}}
+                    {{ form.date_leaving(class="form-control", value=vacation.date_leaving) }}
+                    
+                    {{ form.date_returning.label}}
+                    {{ form.date_returning(class="form-control", value=vacation.date_returning) }}
+                    
+                    {{ form.budget.label}}
+                    {{ form.budget(class="form-control", value=vacation.budget) }}
+                    
+                    {{ form.submit(class="btn btn-primary mt-2") }}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

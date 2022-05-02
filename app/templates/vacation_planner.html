@@ -3,20 +3,59 @@
 {% block content %}
 
 {% if current_user.is_authenticated %}    
-    <div class="row justify-content-center mt-5">
-        <div class="col-4">
-            <div class="">
-                <iframe
-                width="450"
-                height="250"
-                frameborder="0" style="border:0"
-                referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDJSUgd9hmIf0aQ5NPPM1N45TZSJIFMwuI&q=Rome+Italy"
-                allowfullscreen>
-                </iframe>
+
+    {% for vacationss in vacations %}
+
+    
+    <div class="card-group col-12 col-sm-7 offset-sm-2 flex-column mt-2">
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-8">
+                    <div class="card-body d-flex flex-column justify-content-between h-100">
+                        <div class="row">
+                            <div class="col-md-4 d-flex mt-1">
+                                <iframe
+                                    style="border:0"
+                                    loading="lazy"
+                                    allowfullscreen
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDJSUgd9hmIf0aQ5NPPM1N45TZSJIFMwuI
+                                        &q={{vacationss.location}}">
+                                </iframe>
+                            </div>
+                                <h5 class="card-title">{{ vacationss.plan_name}}</h5>
+                            </div>
+                            <div class="row">
+                                <p class="card-text">{{vacationss.location}}</p>
+                            </div>
+                            <div class="row justify-content-between mx-3 mt-3">
+                                <a href="{{ url_for('home.edit_vacation', vacation_id=vacationss.id)}}" class="btn light-shade border border-secondary" style="width: 50px;"><i class="fas fa-edit"></i></a>
+                                <a href="" class="btn btn-danger" style="width: 50px;" data-bs-toggle="modal" data-bs-target="#deleteModal{{vacation_Id}}"><i class="fas fa-trash-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    <div class="modal fade" id="deleteModal{{ vacation_Id }}" tabindex="-1" aria-labelledby="deleteModal{{ vacation_Id }}Label" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title text-dark" id="deleteModal{{ vacation_Id}}Label">Delete {{ vacationss }}?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-dark">
+            Are you sure you want to delete {{ vacationss.plan_name }}? <br>
+            This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <a href="{{ url_for('home.vacationplanner', vacation_id = vacations.id) }}" class="btn btn-danger">Confirm</a>
+            </div>
+        </div>
+        </div>
+    </div> 
+    {% endfor %}   
 {% else %}
 <p>Please Sign In to access your Vacation Book</p>
 {% endif %}

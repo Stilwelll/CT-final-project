@@ -1,8 +1,5 @@
-from webbrowser import get
-from app import db, login
-from app.blueprints.auth.models import User
-from flask_login import current_user
-
+from app import db
+from datetime import datetime
 
 class Vacation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -13,6 +10,7 @@ class Vacation(db.Model):
     date_returning = db.Column(db.Date, nullable=False)
     budget = db.Column(db.Float, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    date_created = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-{% if current_user.is_authenticated %}    
-<p>Hello {{(current_user)}}</p>
-{% else %}
-<p>Please Sign In to access your Vacation Book</p>
-{% endif %}
+<div class="card pt-3">
+    <div class="card-body">
+      {% if current_user.is_authenticated %}    
+      <p>Hello {{(current_user)}} Thank you for using this program!</p>
+      {% else %}
+      <p>Please Sign In to access your Vacation Book</p>
+      {% endif %}
+    </div>
+  </div>
 
 {% endblock content %}
